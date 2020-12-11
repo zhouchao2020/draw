@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+        <title >抽奖页面</title>
+</head>
+<body>
+    <input type="hidden" id="tel" value="{#$tel#}">
+    <span>今日剩余{#$rest#}次机会</span>
+</body>
+
+    <script>
+    //抽奖规则
+    function getDraw(){
+        var tel = document.getElementById("tel").value;//获取手机号
+        //开启post传递
+        var xhr = new XMLHttpRequest();
+        // 设置属性
+        xhr.open('post', 'getDraw.php', true);
+
+        // 如果想要使用post提交数据,必须添加此行
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        // 将数据通过send方法传递
+        xhr.send('tel='+ipone);
+
+        // 发送并接受返回值
+        xhr.onreadystatechange = function () {
+            // 这步为判断服务器是否正确响应
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var res = JSON.parse(xhr.responseText);
+            }
+        };
+    }
+        
+    </script>
+</html>
